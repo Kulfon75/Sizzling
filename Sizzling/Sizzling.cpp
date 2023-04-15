@@ -19,7 +19,8 @@ liczby przypisane znakom w tabeli:
 7 - siedem
 */
 
-//short** draw();
+//zmiększono standardowy kredyt startowy dziesięciokrotnie 
+//ułożenie znaków na taśmach przy milionie gier powoduje stabilizację RTP na około 94% oraz HR na poziomie 35.3%
 
 struct gameData {
 
