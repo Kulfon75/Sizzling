@@ -1,26 +1,26 @@
 ﻿  Sizzling.cpp
-C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(177,12): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
-C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(196,34): warning C4311: "typ rzutowania": obcięcie wskaźnika z "char *" do "int"
-C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(196,34): warning C4302: "typ rzutowania": obcięcie z "char *" do "int"
-C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(201,50): warning C4311: "typ rzutowania": obcięcie wskaźnika z "char *" do "int"
-C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(201,50): warning C4302: "typ rzutowania": obcięcie z "char *" do "int"
-C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(202,49): warning C4311: "typ rzutowania": obcięcie wskaźnika z "char *" do "int"
-C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(202,49): warning C4302: "typ rzutowania": obcięcie z "char *" do "int"
-C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(428,33): warning C4267: "argument": konwersja z "size_t" do "int", możliwa utrata danych
-C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(432,34): warning C4267: "argument": konwersja z "size_t" do "int", możliwa utrata danych
-C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(438,34): warning C4267: "argument": konwersja z "size_t" do "int", możliwa utrata danych
-C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(443,34): warning C4267: "argument": konwersja z "size_t" do "int", możliwa utrata danych
-C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(449,34): warning C4267: "argument": konwersja z "size_t" do "int", możliwa utrata danych
+C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(173,12): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
+C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(192,34): warning C4311: "typ rzutowania": obcięcie wskaźnika z "char *" do "int"
+C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(192,34): warning C4302: "typ rzutowania": obcięcie z "char *" do "int"
+C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(197,50): warning C4311: "typ rzutowania": obcięcie wskaźnika z "char *" do "int"
+C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(197,50): warning C4302: "typ rzutowania": obcięcie z "char *" do "int"
+C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(198,49): warning C4311: "typ rzutowania": obcięcie wskaźnika z "char *" do "int"
+C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(198,49): warning C4302: "typ rzutowania": obcięcie z "char *" do "int"
+C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(343,47): warning C4267: "=": konwersja z "size_t" do "short", możliwa utrata danych
+C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(424,33): warning C4267: "argument": konwersja z "size_t" do "int", możliwa utrata danych
+C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(428,34): warning C4267: "argument": konwersja z "size_t" do "int", możliwa utrata danych
+C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(434,34): warning C4267: "argument": konwersja z "size_t" do "int", możliwa utrata danych
+C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(439,34): warning C4267: "argument": konwersja z "size_t" do "int", możliwa utrata danych
+C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(445,34): warning C4267: "argument": konwersja z "size_t" do "int", możliwa utrata danych
+C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(449,33): warning C4267: "argument": konwersja z "size_t" do "int", możliwa utrata danych
 C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(453,33): warning C4267: "argument": konwersja z "size_t" do "int", możliwa utrata danych
-C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(457,33): warning C4267: "argument": konwersja z "size_t" do "int", możliwa utrata danych
-C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(501,38): warning C4267: "argument": konwersja z "size_t" do "int", możliwa utrata danych
-C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(506,38): warning C4267: "argument": konwersja z "size_t" do "int", możliwa utrata danych
-C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(511,38): warning C4267: "argument": konwersja z "size_t" do "int", możliwa utrata danych
-C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(516,38): warning C4267: "argument": konwersja z "size_t" do "int", możliwa utrata danych
-C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(521,38): warning C4267: "argument": konwersja z "size_t" do "int", możliwa utrata danych
+C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(497,38): warning C4267: "argument": konwersja z "size_t" do "int", możliwa utrata danych
+C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(502,38): warning C4267: "argument": konwersja z "size_t" do "int", możliwa utrata danych
+C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(507,38): warning C4267: "argument": konwersja z "size_t" do "int", możliwa utrata danych
+C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(512,38): warning C4267: "argument": konwersja z "size_t" do "int", możliwa utrata danych
+C:\Users\Kulfon\source\repos\Sizzling\Sizzling\Sizzling.cpp(517,38): warning C4267: "argument": konwersja z "size_t" do "int", możliwa utrata danych
   Trwa generowanie kodu
-  0 of 236 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  Previous IPDB and IOBJ mismatch, fall back to full compilation.
+  All 335 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Zakończono generowanie kodu
   Sizzling.vcxproj -> C:\Users\Kulfon\source\repos\Sizzling\x64\Release\Sizzling.exe

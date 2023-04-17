@@ -4,7 +4,7 @@
 #include <fstream>
 #include <string> 
 #include <math.h>
-
+#include <vector>
 
 using namespace std;
 /*
@@ -61,23 +61,19 @@ struct gameData {
 
 struct reelsStruct //struktura maszyny (jej output oraz układ znaków oraz)
 {
-
-	short reel1[20] = { 4,3,1,7,5,4,6,2,0,3,7,5,2,3,6,5,3,2,4,7 }; //taśmy
-	short reel2[15] = { 0,6,5,4,7,6,3,1,4,2,5,7,5,6,4 };
-	short reel3[25] = { 1,6,0,1,3,4,1,2,3,7,3,1,6,2,5,1,4,1,0,2,6,2,1,5,3 };
-	short reel4[15] = { 2,5,0,6,7,4,1,5,3,1,3,6,7,3,1 };
-	short reel5[17] = { 1,3,2,4,6,0,7,4,5,3,1,6,5,4,1,7,2 };
-
-
-	short* reels[5] = { reel1, reel2, reel3, reel4, reel5 }; //tablica z taśmami
+	vector<vector<short>> reels{
+		{ 4,3,1,7,5,4,6,2,0,3,7,5,2,3,6,5,3,2,4,7 },
+		{ 0,6,5,4,7,6,3,1,4,2,5,7,5,6,4 },
+		{ 1,6,0,1,3,4,1,2,3,7,3,1,6,2,5,1,4,1,0,2,6,2,1,5,3 },
+		{ 2,5,0,6,7,4,1,5,3,1,3,6,7,3,1 },
+		{ 1,3,2,4,6,0,7,4,5,3,1,6,5,4,1,7,2 }
+	};
 
 	short output[3][5] = {
 		{0,0,0,0,0},
 		{0,0,0,0,0},
 		{0,0,0,0,0}
 	};
-
-	short getReelSize(short reelNumber); //funkcja zwracająca ilość znaków na taśmie
 };
 
 struct gameStatistics //struktura przechowywująca statystyki oraz nazwy symboli
@@ -344,10 +340,10 @@ void draw(reelsStruct* machine)
 
 	for (int i = 0; i < 5; i++) //wylosowanie pozycji taśm
 	{
-		position = rand() % machine->getReelSize(i);
+		position = rand() % machine->reels[i].size();
 		for (int j = 0; j < 3; j++)
 		{
-			if (position == machine->getReelSize(i) - 1)
+			if (position == machine->reels[i].size() - 1)
 			{
 				position = -1; //jeśli pozycja przekracza zakres taśmy wracamy na początek
 			}
@@ -523,31 +519,4 @@ void list::printData(int range, float allGain, int allHits)
 		printSeparators(91);
 		temp = temp->next;
 	}
-}
-
-short reelsStruct::getReelSize(short reelNymber)
-{
-	short temp;
-	switch (reelNymber)
-	{
-	case 0:
-		temp = sizeof(reel1) / sizeof(short);
-		break;
-	case 1:
-		temp = sizeof(reel2) / sizeof(short);
-		break;
-	case 2:
-		temp = sizeof(reel3) / sizeof(short);
-		break;
-	case 3:
-		temp = sizeof(reel4) / sizeof(short);
-		break;
-	case 4:
-		temp = sizeof(reel5) / sizeof(short);
-		break;
-	default:
-		temp = 0;
-		break;
-	}
-	return temp;
 }
