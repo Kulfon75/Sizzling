@@ -19,7 +19,7 @@ liczby przypisane znakom w tabeli:
 7 - siedem
 */
 
-//zmiększono standardowy kredyt startowy dziesięciokrotnie 
+//zmniejszono standardowy kredyt startowy dziesięciokrotnie 
 //ułożenie znaków na taśmach przy milionie gier powoduje stabilizację RTP na około 94% oraz HR na poziomie 35.3%
 
 struct gameData {
@@ -91,9 +91,9 @@ struct gameStatistics //struktura przechowywująca statystyki oraz nazwy symboli
 
 	float currentPayoutCounter = 0;
 
-	float currentSaldo = 1000000;
+	float currentSaldo = 100000;
 
-	float startingSaldo = 1000000;
+	float startingSaldo = 100000;
 
 	int showStatsRange = 100;
 
@@ -167,6 +167,8 @@ void printStatisticsLayoutHits(gameStatistics*, gameData*);
 void printStatsRange(gameStatistics*, list*);
 void printSpaces(int, int);
 void printSeparators(int);
+void play(gameData*, reelsStruct*, gameStatistics*, int, bool, string);
+void presetSymbols(gameData*, reelsStruct*, gameStatistics*, string);
 
 int main(int argc, char* argv[])
 {
@@ -176,14 +178,14 @@ int main(int argc, char* argv[])
 	gameData game;
 	reelsStruct machine;
 	gameStatistics stats;
-	list* statsList = new list;
 	int gamesCount = 0; //ilość gier do przelosowania
-	
+
 	string fileName;
 	ofstream gameFile;
-	bool isArgSaveToFile = false, isArgGames = false;
+	string symbolsArg;
+	bool isArgSaveToFile = false, isArgGames = false, isArgSymbols = false;
 
-	for (int i = 0; i < argc; ++i)
+	for (int i = 0; i < argc; ++i) //sprawdzanie argumentów
 	{
 		if (argv[i][0] == '-' && i + 1 <= argc)
 		{
@@ -202,16 +204,34 @@ int main(int argc, char* argv[])
 				fileName = (string)argv[i + 1];
 				isArgSaveToFile = true;
 			}
+			if (argv[i] == "-symbols"s) //jeśli ten argument zostanie podany sprawda jakie znaki zostały podane
+			{
+				symbolsArg = (string)argv[i + 1];
+				isArgSymbols = true;
+			}
 		}
 	}
 
-	if (!isArgGames)
+	if (!isArgSymbols)
 	{
-		cout << "Podaj liczbe losowan: ";
-		cin >> gamesCount;
+		if (!isArgGames)
+		{
+			cout << "Podaj liczbe losowan: ";
+			cin >> gamesCount;
+		}
+		play(&game, &machine, &stats, gamesCount, isArgSaveToFile, fileName);
 	}
+	else
+	{
+		presetSymbols(&game, &machine, &stats, symbolsArg);
+	}
+}
 
-	stats.showStatsRange = gamesCount / 10; //ustawione w ten sposób by w skróconym raporcie wyświetlkiło się tylko 10 pozycji
+void play(gameData* game, reelsStruct* machine, gameStatistics* stats, int gamesCount, bool isArgSaveToFile, string fileName)
+{
+	ofstream gameFile;
+	list* statsList = new list;
+	stats->showStatsRange = gamesCount / 10; //ustawione w ten sposób by w skróconym raporcie wyświetlkiło się tylko 10 pozycji
 	if (isArgSaveToFile)
 	{
 		gameFile.open(fileName, ios::in | ios::app);
@@ -219,44 +239,44 @@ int main(int argc, char* argv[])
 
 	for (int i = 0; i < gamesCount; i++)
 	{
-		if (stats.currentSaldo < stats.gameCost)
+		if (stats->currentSaldo < stats->gameCost)
 		{
 			break; //jeśli saldo jest niewystarczające gra nie będzie trwała dalej
 		}
 
-		stats.currentPayoutCounter = 0; //ustawianie danych startowych dla każdego nowego losowania
-		stats.currentSaldo -= stats.gameCost;
-		stats.drawsCounter++;
-		
-		draw(&machine); //losowanie układu
-		
-		checkScatters(&game, &machine, &stats);
-		checkLayout(&game, &machine, &stats); //sprawdzanie możliwych wygranych
+		stats->currentPayoutCounter = 0; //ustawianie danych startowych dla każdego nowego losowania
+		stats->currentSaldo -= stats->gameCost;
+		stats->drawsCounter++;
 
-		stats.gain += stats.currentPayoutCounter; 
-		stats.currentSaldo += stats.currentPayoutCounter; //aktualizacja salda
+		draw(machine); //losowanie układu
 
-		if (stats.currentPayoutCounter > stats.maxGain) //sprawdzanie największej wygranej w losowaniach
+		checkScatters(game, machine, stats);
+		checkLayout(game, machine, stats); //sprawdzanie możliwych wygranych
+
+		stats->gain += stats->currentPayoutCounter;
+		stats->currentSaldo += stats->currentPayoutCounter; //aktualizacja salda
+
+		if (stats->currentPayoutCounter > stats->maxGain) //sprawdzanie największej wygranej w losowaniach
 		{
-			stats.maxGain = stats.currentPayoutCounter;
+			stats->maxGain = stats->currentPayoutCounter;
 		}
 
-		if ((i + 1) % stats.showStatsRange == 0) //jeśli zostało wylosowane kolejne 10% zadeklarowanych gier
+		if ((i + 1) % stats->showStatsRange == 0) //jeśli zostało wylosowane kolejne 10% zadeklarowanych gier
 		{
-			statsList->addStatRange(stats.tempGain, stats.tempHitCounter, i); //dadajemy wygrane w tych gier oraz ich ilość do listy
-			stats.tempGain = 0;
-			stats.tempHitCounter = 0;
+			statsList->addStatRange(stats->tempGain, stats->tempHitCounter, i); //dadajemy wygrane w tych gier oraz ich ilość do listy
+			stats->tempGain = 0;
+			stats->tempHitCounter = 0;
 		}
 		else
 		{
-			stats.tempGain += stats.currentPayoutCounter; //jeśli nie to zwiększamy tymczasową wygraną
+			stats->tempGain += stats->currentPayoutCounter; //jeśli nie to zwiększamy tymczasową wygraną
 		}
 
-		stats.HR = (float)stats.hitCounter / (float)stats.drawsCounter * 100;
-		stats.RTP = stats.gain / (stats.drawsCounter * stats.gameCost) * 100;
+		stats->HR = (float)stats->hitCounter / (float)stats->drawsCounter * 100;
+		stats->RTP = stats->gain / (stats->drawsCounter * stats->gameCost) * 100;
 		if (isArgSaveToFile)
 		{
-			saveToFile(gameFile, to_string(stats.currentSaldo));
+			saveToFile(gameFile, to_string(stats->currentSaldo));
 		}
 	}
 
@@ -264,13 +284,64 @@ int main(int argc, char* argv[])
 	{
 		gameFile.close();
 	}
-	
-	printStatistics(&stats); //wyświetlenie statystyk
 
-	printStatisticsLayoutHits(&stats, &game); //wyświetlenie głównych statystyk
-	printStatsRange(&stats, statsList); //wyświetlenie skróconego raportu
+	printStatistics(stats); //wyświetlenie statystyk
+
+	printStatisticsLayoutHits(stats, game); //wyświetlenie głównych statystyk
+	printStatsRange(stats, statsList); //wyświetlenie skróconego raportu
 
 	delete(statsList); //usunięcie listy
+}
+
+void presetSymbols(gameData* game, reelsStruct* machine, gameStatistics* stats, string data)
+{
+	short countSymbols = 0;
+	bool isIncorect = false;
+	for (int i = 0; i < data.length(); i++)
+	{
+		if (data[i] != ',')
+		{
+			countSymbols++;
+		}
+		else
+		{
+			data.erase(i, 1);
+			i--;
+		}
+	}
+	if (countSymbols == 15)
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			for (int j = 0; j < 5; j++)
+			{
+				if ((int)data[j + (i * 5)] - 48 < 0 || (int)data[j + (i * 5)] - 48 > 7)
+				{
+					cout << "Incorrect symbol between commas";
+					isIncorect = true;
+					break;
+				}
+				else
+				{
+					machine->output[i][j] = (int)data[j + (i * 5)] - 48;
+				}
+			}
+			if (isIncorect)
+			{
+				break;
+			}
+		}
+		if (!isIncorect)
+		{
+			checkScatters(game, machine, stats);
+			checkLayout(game, machine, stats); //sprawdzanie możliwych wygranych
+			cout << stats->currentPayoutCounter;
+		}
+	}
+	else
+	{
+		cout << "Incorrect numbers of symbols";
+	}
 }
 
 void checkLayout(gameData* game, reelsStruct* machine, gameStatistics* gameStats)
@@ -372,8 +443,8 @@ void printStatistics(gameStatistics* gameStats)
 	cout << "Suma wygranych: " << gameStats->gain << endl;
 	cout << "Najwyższa wygrana z jednego losowania: " << gameStats->maxGain << endl;
 	cout << "Saldo: " << gameStats->currentSaldo << endl;
-	cout << "Hit Ratio: " << gameStats->HR << endl;
-	cout << "RTP: " << gameStats->RTP << endl;
+	cout << "Hit Ratio: " << gameStats->HR << "%" << endl;
+	cout << "RTP: " << gameStats->RTP << "%" << endl;
 }
 
 void saveToFile(ofstream& gameFile, string text)
